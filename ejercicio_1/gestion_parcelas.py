@@ -1,3 +1,8 @@
+
+
+
+
+
 from datetime import datetime
 
 class Parcela:
@@ -19,7 +24,7 @@ class Parcela:
     def superficie_ha(self):
         return self._superficie_ha
 
-    # --- Operaciones ---
+
     def actualizar_cultivo(self, nuevo_cultivo):
         if self.estado == "inactiva":
             raise RuntimeError("No se puede actualizar cultivo en una parcela inactiva.")
@@ -32,13 +37,13 @@ class Parcela:
 
     def activar(self, motivo):
         if self.estado == "activa":
-            return  # ya está activa, no hace nada
+            return
         self.estado = "activa"
         self._registrar_evento("ACTIVACIÓN", motivo)
 
     def desactivar(self, motivo):
         if self.estado == "inactiva":
-            return  # ya está inactiva
+            return  
         self.estado = "inactiva"
         self._registrar_evento("DESACTIVACIÓN", motivo)
 
@@ -49,7 +54,7 @@ class Parcela:
         self._superficie_ha = round(nueva_superficie, 2)
         self._registrar_evento("RECTIFICACIÓN_SUPERFICIE", f"De {superficie_prev} ha a {self._superficie_ha} ha. Motivo: {motivo}")
 
-    # --- Método interno ---
+  
     def _registrar_evento(self, tipo, detalle):
         evento = {
             "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -61,3 +66,21 @@ class Parcela:
     def mostrar_historial(self):
         for e in self.historial_eventos:
             print(f"[{e['fecha']}] {e['tipo']}: {e['detalle']}")
+
+from gestion_parcelas import Parcela 
+
+
+p = Parcela(id_parcela=1, superficie_ha=10.5, cultivo_actual="choclo")
+
+p.actualizar_cultivo("choclo")
+p.rectificar_superficie(12, "Medición más precisa")
+p.desactivar("Descanso de la tierra")
+try:
+    p.actualizar_cultivo("manzanas")  
+except Exception as e:
+    print("Error:", e)
+
+p.activar("Se reanuda la producción")
+p.actualizar_cultivo("manzanas")
+
+p.mostrar_historial()
