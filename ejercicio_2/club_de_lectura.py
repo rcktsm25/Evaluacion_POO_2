@@ -83,6 +83,7 @@ pub1 = Publicacion(1, "Don Quijote", 1605)
 print(f"Publicación creada: {pub1.titulo}, año {pub1.anio}")
 
 
+
 try:
     pub2 = Publicacion(2, "Algo antiguo", 1400)
 except ValueError as e:
@@ -90,29 +91,38 @@ except ValueError as e:
 
 
 libro = Libro(3, "Cien años de soledad", 1967, 500)
+
+
 print(f"Libro creado: {libro.titulo}, páginas: {libro.paginas_totales}")
 
 
+
+
 libro.leer(120)
+
+
+
+
 print(f"Páginas leídas: {libro.paginas_leidas}, Progreso: {libro.consultar_progreso()}%")
+
 
 
 try:
     libro.leer(400)
-except ValueError as e:
-    print("Error:", e)
-
-
+except ValueError as e:    print("Error:", e)
 print("Progreso actual:", libro.consultar_progreso(), "%")
 
 libro.actualizar_año(1970)
+
+
 print("Nuevo año del libro:", libro.anio)
+
 
 
 print("\nHistorial de eventos:")
 for e in libro.historial_eventos:
     print(f"- {e['fecha']} | {e['campo']}: {e['anterior']} -> {e['nuevo']}")
 
-print("\nEventos de lectura:")
+    print("\nEventos de lectura:")
 for e in libro.eventos_lectura:
     print(f"- {e['fecha']} | Leídas: {e['paginas_leidas']} (Acumulado: {e['total_acumulado']})")

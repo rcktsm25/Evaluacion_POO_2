@@ -38,29 +38,3 @@ class Actividad:
 
 
 
-
-act1 = Actividad(1, "Ciclismo", 60)
-print(f"Actividad creada: {act1.nombre}, duración: {act1.duracion_min} min")
-
-try:
-    act2 = Actividad(2, "", 30)
-except ValueError as e:
-    print("Error:", e)
-
-try:
-    act3 = Actividad(3, "Natación", 0)
-except ValueError as e:
-    print("Error:", e)
-
-
-act1.actualizar_nombre("Ciclismo de montaña")
-print(f"Nombre actualizado: {act1.nombre}")
-
-
-act1.actualizar_duracion(75)
-print(f"Duración actualizada: {act1.duracion_min} min")
-
-
-print("\nHistorial de eventos:")
-for e in act1.historial_eventos:
-    print(f"- {e['fecha']} | {e['campo']}: {e['anterior']} -> {e['nuevo']}")
