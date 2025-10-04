@@ -1,8 +1,5 @@
 
-
-
-
-
+###MODELO 1
 from datetime import datetime
 
 class Parcela:
@@ -84,3 +81,6 @@ p.activar("Se reanuda la producción")
 p.actualizar_cultivo("manzanas")
 
 p.mostrar_historial()
+
+
+
